@@ -1,7 +1,8 @@
-import { openai } from "@ai-sdk/openai";
-import { streamText, convertToModelMessages } from "ai";
-import { stepCountIs } from "ai";
-import { SYSTEM_PROMPT } from "./prompt";
+import { openai } from '@ai-sdk/openai';
+import { convertToModelMessages /*, stepCountIs*/, streamText } from 'ai';
+
+import { SYSTEM_PROMPT } from './prompt';
+
 /*
 TODO: Implement Tools for better responses
 EXAMPLE TOOLS:
@@ -11,9 +12,9 @@ EXAMPLE TOOLS:
 
 function errorHandler(error: unknown) {
   if (error == null) {
-    return "Unknown error";
+    return 'Unknown error';
   }
-  if (typeof error === "string") {
+  if (typeof error === 'string') {
     return error;
   }
   if (error instanceof Error) {
@@ -25,14 +26,14 @@ function errorHandler(error: unknown) {
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
-    console.log("[CHAT-API] Incoming messages:", messages);
+    console.log('[CHAT-API] Incoming messages:', messages);
     console.log(
-      "Messages Parts:",
+      'Messages Parts:',
       messages.map((m: any) => m.parts)
     );
 
     const result = streamText({
-      model: openai("gpt-5.1-nano"),
+      model: openai('gpt-5.1-nano'),
       messages: convertToModelMessages([SYSTEM_PROMPT, ...messages]),
     });
 
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
       onError: errorHandler,
     });
   } catch (err) {
-    console.error("Global error:", err);
+    console.error('Global error:', err);
     const errorMessage = errorHandler(err);
     return new Response(errorMessage, { status: 500 });
   }

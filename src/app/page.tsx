@@ -1,66 +1,43 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  FileText,
+  Laugh,
+  Layers,
+  PartyPopper,
+  SquareUserRound,
+  UserRoundSearch,
+} from 'lucide-react';
+
+/* ---------- quick-question data ---------- */
+const questions = {
+  Me: 'Who are you? Tell me a bit about yourself.',
+  Projects: 'What projects have you built? What are you working on right now?',
+  Skills: 'What are your skills? Share your technical and soft skills.',
+  Background: 'What’s your experience and education? Walk me through your background.',
+  Resume: 'Can you show me your resume or CV?',
+  Fun: 'What’s something fun or interesting about you? What are your hobbies?',
+  Contact: 'How can I contact you?',
+} as const;
+const questionConfig = [
+  { key: 'Me', color: '#329696', icon: Laugh },
+  { key: 'Resume', color: '#132066', icon: FileText },
+  { key: 'Projects', color: '#3E9858', icon: BriefcaseBusiness },
+  { key: 'Skills', color: '#856ED9', icon: Layers },
+  { key: 'Background', color: '#4A6FA5', icon: SquareUserRound },
+  { key: 'Fun', color: '#B95F9D', icon: PartyPopper },
+  { key: 'Contact', color: '#C19433', icon: UserRoundSearch },
+] as const;
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  const [input, setInput] = useState('');
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  return <div className="">Home</div>;
 }
